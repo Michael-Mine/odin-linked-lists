@@ -39,6 +39,29 @@ function LinkedList() {
         currentNode = currentNode.nextNode;
       }
     },
+
+    size: function () {
+      let counter = 0;
+      let currentNode = this.head;
+      while (currentNode) {
+        counter += 1;
+        currentNode = currentNode.nextNode;
+      }
+      console.log("Linked list has " + counter + " nodes");
+      return counter;
+    },
+
+    getHead: function () {
+      return this.head;
+    },
+
+    getTail: function () {
+      let currentNode = this.head;
+      while (currentNode) {
+        currentNode = currentNode.nextNode;
+      }
+      return currentNode;
+    },
   };
 }
 
@@ -52,3 +75,4 @@ list.append("snake");
 list.prepend("turtle");
 
 list.printList();
+list.size();
