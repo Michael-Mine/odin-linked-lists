@@ -52,15 +52,34 @@ function LinkedList() {
     },
 
     getHead: function () {
+      console.log("Linked list head is " + this.head.value);
       return this.head;
     },
 
     getTail: function () {
       let currentNode = this.head;
-      while (currentNode) {
+      while (currentNode.nextNode) {
         currentNode = currentNode.nextNode;
       }
+      console.log("Linked list tail is " + currentNode.value);
       return currentNode;
+    },
+    // index starting at 0
+    at: function (index) {
+      let currentNode = this.head;
+      for (let i = 0; i < index; i++) {
+        currentNode = currentNode.nextNode;
+      }
+      console.log("Linked list index " + index + " is " + currentNode.value);
+      return currentNode;
+    },
+    // removes last element
+    pop: function () {
+      let currentNode = this.head;
+      while (currentNode.nextNode.nextNode) {
+        currentNode = currentNode.nextNode;
+      }
+      currentNode.nextNode = currentNode.nextNode.nextNode;
     },
   };
 }
@@ -76,3 +95,8 @@ list.prepend("turtle");
 
 list.printList();
 list.size();
+list.getHead();
+list.getTail();
+list.at(2);
+list.pop();
+list.printList();
