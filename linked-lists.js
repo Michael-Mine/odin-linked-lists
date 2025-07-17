@@ -10,7 +10,6 @@ function Node(data) {
 function LinkedList() {
   return {
     head: null,
-
     // add new node to end of linked list
     append: function (data) {
       const newNode = Node(data);
@@ -26,20 +25,30 @@ function LinkedList() {
       }
       currentNode.nextNode = newNode;
     },
+    // add new node to start of linked list
+    prepend: function (data) {
+      const newNode = Node(data);
+      newNode.nextNode = this.head;
+      this.head = newNode;
+    },
+
+    printList: function () {
+      let currentNode = this.head;
+      while (currentNode) {
+        console.log(currentNode.value);
+        currentNode = currentNode.nextNode;
+      }
+    },
   };
 }
 
 const list = LinkedList();
-
-console.log(list);
 
 list.append("dog");
 list.append("cat");
 list.append("parrot");
 list.append("hamster");
 list.append("snake");
-list.append("turtle");
+list.prepend("turtle");
 
-console.log(list.toString());
-
-console.log(list);
+list.printList();
