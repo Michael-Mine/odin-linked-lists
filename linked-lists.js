@@ -81,6 +81,34 @@ function LinkedList() {
       }
       currentNode.nextNode = currentNode.nextNode.nextNode;
     },
+
+    contains: function (value) {
+      let currentNode = this.head;
+      while (currentNode) {
+        if (currentNode.value === value) {
+          console.log("true");
+          return true;
+        }
+        currentNode = currentNode.nextNode;
+      }
+      console.log("false");
+      return false;
+    },
+    // find index starting at 0
+    find: function (value) {
+      let index = 0;
+      let currentNode = this.head;
+      while (currentNode) {
+        if (currentNode.value === value) {
+          console.log(value + " is at Linked list index " + index);
+          return index;
+        }
+        index += 1;
+        currentNode = currentNode.nextNode;
+      }
+      console.log(value + " is not in Linked list");
+      return null;
+    },
   };
 }
 
@@ -100,3 +128,7 @@ list.getTail();
 list.at(2);
 list.pop();
 list.printList();
+list.contains("monkey");
+list.contains("hamster");
+list.find("monkey");
+list.find("parrot");
