@@ -7,7 +7,7 @@ function Node(data) {
   return { value, nextNode };
 }
 
-function LinkedList() {
+export function LinkedList() {
   return {
     head: null,
     // add new node to end of linked list
@@ -31,7 +31,7 @@ function LinkedList() {
       newNode.nextNode = this.head;
       this.head = newNode;
     },
-
+    //added to test methods while creating
     printList: function () {
       let currentNode = this.head;
       while (currentNode) {
@@ -47,7 +47,6 @@ function LinkedList() {
         counter += 1;
         currentNode = currentNode.nextNode;
       }
-      console.log("Linked list has " + counter + " nodes");
       return counter;
     },
 
@@ -66,6 +65,12 @@ function LinkedList() {
     },
     // index starting at 0
     at: function (index) {
+      let size = this.size();
+      if (index > size) {
+        console.log("Linked list only has " + size + " nodes");
+        return;
+      }
+
       let currentNode = this.head;
       for (let i = 0; i < index; i++) {
         currentNode = currentNode.nextNode;
@@ -109,26 +114,35 @@ function LinkedList() {
       console.log(value + " is not in Linked list");
       return null;
     },
+
+    toString: function () {
+      let string = "";
+      let currentNode = this.head;
+      while (currentNode) {
+        string += "( " + currentNode.value + " ) -> ";
+        currentNode = currentNode.nextNode;
+      }
+      string += "null";
+      console.log(string);
+      return string;
+    },
+
+    insertAt: function (data, index) {
+      const newNode = Node(data);
+      let currentNode = this.head;
+      for (let i = 0; i < index - 1; i++) {
+        currentNode = currentNode.nextNode;
+      }
+      newNode.nextNode = currentNode.nextNode;
+      currentNode.nextNode = newNode;
+    },
+
+    removeAt: function (index) {
+      let currentNode = this.head;
+      for (let i = 0; i < index - 1; i++) {
+        currentNode = currentNode.nextNode;
+      }
+      currentNode.nextNode = currentNode.nextNode.nextNode;
+    },
   };
 }
-
-const list = LinkedList();
-
-list.append("dog");
-list.append("cat");
-list.append("parrot");
-list.append("hamster");
-list.append("snake");
-list.prepend("turtle");
-
-list.printList();
-list.size();
-list.getHead();
-list.getTail();
-list.at(2);
-list.pop();
-list.printList();
-list.contains("monkey");
-list.contains("hamster");
-list.find("monkey");
-list.find("parrot");
