@@ -13,7 +13,7 @@ list.size();
 list.getHead();
 list.getTail();
 list.at(2);
-list.at(7);
+list.at(6);
 list.pop();
 list.printList();
 
@@ -23,7 +23,9 @@ list.find("monkey");
 list.find("parrot");
 
 list.toString();
+list.insertAt("monkey", 5);
 list.insertAt("monkey", 3);
 list.toString();
+list.removeAt(6);
 list.removeAt(5);
 list.toString();

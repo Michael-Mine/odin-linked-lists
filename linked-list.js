@@ -63,10 +63,10 @@ export function LinkedList() {
       console.log("Linked list tail is " + currentNode.value);
       return currentNode;
     },
-    // index starting at 0
+    // get value index starting at 0
     at: function (index) {
       let size = this.size();
-      if (index > size) {
+      if (index > size - 1) {
         console.log("Linked list only has " + size + " nodes");
         return;
       }
@@ -80,11 +80,16 @@ export function LinkedList() {
     },
     // removes last element
     pop: function () {
+      if (this.head === null) return;
+      if (this.head.nextNode == null) {
+        this.head = null;
+        return;
+      }
       let currentNode = this.head;
       while (currentNode.nextNode.nextNode) {
         currentNode = currentNode.nextNode;
       }
-      currentNode.nextNode = currentNode.nextNode.nextNode;
+      currentNode.nextNode = null;
     },
 
     contains: function (value) {
@@ -126,19 +131,48 @@ export function LinkedList() {
       console.log(string);
       return string;
     },
-
+    // index starting at 0
     insertAt: function (data, index) {
+      let size = this.size();
+
+      if (index > size - 1) {
+        console.log("Linked list only has " + size + " nodes");
+        return;
+      }
+
       const newNode = Node(data);
+
+      if (size === 0) {
+        this.head = newNode;
+        return;
+      }
+
       let currentNode = this.head;
+      if (size === 1) {
+        currentNode.nextNode = newNode;
+        return;
+      }
+
       for (let i = 0; i < index - 1; i++) {
         currentNode = currentNode.nextNode;
       }
       newNode.nextNode = currentNode.nextNode;
       currentNode.nextNode = newNode;
     },
-
+    // index starting at 0
     removeAt: function (index) {
+      let size = this.size();
+      if (index > size - 1) {
+        console.log("Linked list only has " + size + " nodes");
+        return;
+      }
+
       let currentNode = this.head;
+      if (size === 1) {
+        this.head = null;
+        return;
+      }
+
       for (let i = 0; i < index - 1; i++) {
         currentNode = currentNode.nextNode;
       }
